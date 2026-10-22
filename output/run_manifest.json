@@ -22,6 +22,6 @@
     "JE-010"
   ],
   "explanation_sources": [
-    "template"
+    "llm:gpt-4o-mini"
   ]
 }

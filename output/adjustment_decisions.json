@@ -31,11 +31,11 @@
       ],
       "override": null,
       "explanation": {
-        "headline": "JE-001 passed all blocking checks and was posted.",
-        "explanation": "This entry (850,000.00) is above the materiality threshold of 340,325.00 (5% of pre-tax income 6,806,500.00). It can be posted but needs documented approval and supporting workings.",
-        "suggested_fix": "Attach approval evidence (e.g., Controller sign-off)."
+        "headline": "Journal Entry Accepted",
+        "explanation": "The journal entry for accruing the Q4 bonus pool has been accepted. However, it exceeds the materiality threshold of 340,325.00, which requires documented approval and supporting workings. This is a standard procedure to ensure proper oversight on significant entries.",
+        "suggested_fix": "Please attach approval evidence, such as Controller sign-off, to comply with the materiality requirement."
       },
-      "explanation_source": "template"
+      "explanation_source": "llm:gpt-4o-mini"
     },
     {
       "entry_id": "JE-002",
@@ -61,11 +61,11 @@
       ],
       "override": null,
       "explanation": {
-        "headline": "JE-002 was rejected and not posted.",
-        "explanation": "Total debits are 28,500.00 but total credits are 25,000.00, a difference of 3,500.00. An entry must balance before it can be posted, and the system will not guess which side is wrong.",
+        "headline": "Journal Entry REJECTED due to imbalance",
+        "explanation": "The journal entry was rejected because the total debits of 28,500.00 do not equal the total credits of 25,000.00, resulting in a difference of 3,500.00. For a journal entry to be accepted, the debits must equal the credits. The system cannot determine which side is incorrect.",
         "suggested_fix": "Confirm the correct amount with the preparer and resubmit with debits equal to credits (either both 28,500.00 or both 25,000.00)."
       },
-      "explanation_source": "template"
+      "explanation_source": "llm:gpt-4o-mini"
     },
     {
       "entry_id": "JE-003",
@@ -95,11 +95,11 @@
       ],
       "override": null,
       "explanation": {
-        "headline": "JE-003 is on hold until someone reviews it.",
-        "explanation": "The entry books 11,200.00 of revaluation on 1110 (EUR), but recalculating from the trial balance and the given rates does not reproduce it (from period average rate 1.082: EUR 825,400.00 x (1.095 - 1.082) = 10,730.20; from opening rate 1.071: EUR 825,400.00 x (1.095 - 1.071) = 19,809.60). Also, if the trial balance is translated at the period-end rate anyway, this entry would count the revaluation twice.",
-        "suggested_fix": "Share the revaluation workings and confirm whether TB foreign rows are in local currency."
+        "headline": "Journal Entry Quarantined Due to FX Revaluation Mismatch",
+        "explanation": "The journal entry has been quarantined because the FX revaluation amount of 11,200.00 does not match the expected calculations based on the trial balance and given rates. The recalculated amounts from both the period average and opening rates indicate discrepancies, suggesting that the revaluation may have been recorded incorrectly. Additionally, if the trial balance is already translated at the period-end rate, this entry could result in double counting the revaluation.",
+        "suggested_fix": "Please share the revaluation workings and confirm whether the trial balance foreign rows are in local currency."
       },
-      "explanation_source": "template"
+      "explanation_source": "llm:gpt-4o-mini"
     },
     {
       "entry_id": "JE-004",
@@ -113,11 +113,11 @@
       "findings": [],
       "override": null,
       "explanation": {
-        "headline": "JE-004 passed all blocking checks and was posted.",
-        "explanation": "No issues were found.",
-        "suggested_fix": "No action needed."
+        "headline": "Journal Entry Accepted",
+        "explanation": "The journal entry for the bad debt provision top-up has been accepted. It aligns with the AR aging review and appropriately reflects the necessary adjustments to the reserve and allowance accounts. The debit and credit amounts are balanced, ensuring compliance with accounting principles.",
+        "suggested_fix": "No changes needed."
       },
-      "explanation_source": "template"
+      "explanation_source": "llm:gpt-4o-mini"
     },
     {
       "entry_id": "JE-005",
@@ -160,11 +160,11 @@
       ],
       "override": null,
       "explanation": {
-        "headline": "JE-005 is on hold until someone reviews it.",
-        "explanation": "Line JE-005#L1 posts 18,500.00 to account 6315, which does not exist in the chart of accounts. Closest matches: 6310 Travel and Entertainment (medium confidence); 6300 Marketing and Advertising (low confidence). Note: mapping to 6310 would put both sides of this entry on the same account, so it would have no effect. The preparer may intend a new account.",
-        "suggested_fix": "Either correct the account code, or have the COA owner create the account, or approve a mapping in overrides.json (the entry is then re-checked)."
+        "headline": "Journal Entry Quarantined",
+        "explanation": "Your journal entry JE-005 has been quarantined because it includes a line posting to account 6315, which does not exist in the chart of accounts. The closest match is account 6310, but mapping to it would result in both sides of the entry being on the same account, rendering it ineffective. This suggests you may need a new account.",
+        "suggested_fix": "Please correct the account code to one that exists, request the creation of account 6315 from the COA owner, or approve a mapping in overrides.json for re-checking."
       },
-      "explanation_source": "template"
+      "explanation_source": "llm:gpt-4o-mini"
     },
     {
       "entry_id": "JE-006",
@@ -178,11 +178,11 @@
       "findings": [],
       "override": null,
       "explanation": {
-        "headline": "JE-006 passed all blocking checks and was posted.",
-        "explanation": "No issues were found.",
-        "suggested_fix": "No action needed."
+        "headline": "Journal Entry Accepted",
+        "explanation": "The journal entry JE-006 for depreciation catch-up has been accepted. It includes a debit to account 6500 and a credit to account 1211, which are appropriate for recording depreciation. The amounts are balanced, and the entry aligns with standard accounting practices for fixed asset depreciation.",
+        "suggested_fix": "No changes are needed as the entry has been accepted."
       },
-      "explanation_source": "template"
+      "explanation_source": "llm:gpt-4o-mini"
     },
     {
       "entry_id": "JE-007",
@@ -196,11 +196,11 @@
       "findings": [],
       "override": null,
       "explanation": {
-        "headline": "JE-007 passed all blocking checks and was posted.",
-        "explanation": "No issues were found.",
-        "suggested_fix": "No action needed."
+        "headline": "Journal Entry Accepted",
+        "explanation": "The journal entry JE-007 for the deferred tax true-up has been accepted. It includes a debit to account 8200 for DTA reduction and a corresponding credit to account 1250 to reduce DTA. The amounts are balanced, and the entry aligns with the tax provision memo dated 2024-12-31.",
+        "suggested_fix": "No action needed as the entry has been accepted."
       },
-      "explanation_source": "template"
+      "explanation_source": "llm:gpt-4o-mini"
     },
     {
       "entry_id": "JE-008",
@@ -238,11 +238,11 @@
       ],
       "override": null,
       "explanation": {
-        "headline": "JE-008 was rejected and not posted.",
-        "explanation": "Every line nets to zero on the same account(s) (2170): 320,000.00 is debited and credited to the same place, so the entry changes nothing. This usually means a counterparty account was keyed wrongly. The chart of accounts has no intercompany receivable or counterparty account to match 2170 against, so this cannot be reconciled or eliminated with the other entity's books.",
-        "suggested_fix": "Identify the real counterparty account (e.g., cash or an intercompany receivable) and resubmit."
+        "headline": "Journal Entry JE-008 Rejected",
+        "explanation": "The journal entry was rejected because it nets to zero on the same account (2170). Both a debit and credit of 320,000.00 were recorded, which means the entry has no effect. This typically indicates that a counterparty account was entered incorrectly.",
+        "suggested_fix": "Identify the correct counterparty account (e.g., cash or an intercompany receivable) and resubmit the entry."
       },
-      "explanation_source": "template"
+      "explanation_source": "llm:gpt-4o-mini"
     },
     {
       "entry_id": "JE-009",
@@ -256,11 +256,11 @@
       "findings": [],
       "override": null,
       "explanation": {
-        "headline": "JE-009 passed all blocking checks and was posted.",
-        "explanation": "No issues were found.",
-        "suggested_fix": "No action needed."
+        "headline": "Journal Entry Accepted",
+        "explanation": "The journal entry for accruing legal fees related to ongoing litigation has been accepted. It includes a debit to account 6400 and a credit to account 2120, which are appropriate for this type of transaction. The entry is supported by a legal memo dated December 29, 2024, which provides the necessary documentation for the accrual.",
+        "suggested_fix": "No action needed; the entry is accepted."
       },
-      "explanation_source": "template"
+      "explanation_source": "llm:gpt-4o-mini"
     },
     {
       "entry_id": "JE-010",
@@ -274,11 +274,11 @@
       "findings": [],
       "override": null,
       "explanation": {
-        "headline": "JE-010 passed all blocking checks and was posted.",
-        "explanation": "No issues were found.",
-        "suggested_fix": "No action needed."
+        "headline": "Journal Entry Accepted",
+        "explanation": "The journal entry JE-010 for reclassifying the long-term debt's current portion has been accepted. It aligns with the Treasury schedule and correctly reflects the movement of funds between accounts 2210 and 2140. The debit and credit amounts are balanced, ensuring proper accounting practices.",
+        "suggested_fix": "No action needed, the entry is accepted."
       },
-      "explanation_source": "template"
+      "explanation_source": "llm:gpt-4o-mini"
     }
   ]
 }

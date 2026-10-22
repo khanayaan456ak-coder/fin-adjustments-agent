@@ -38,7 +38,7 @@ adjagent run --no-llm --overrides examples/overrides.example.json --out output/h
 pytest -q                          # 25 tests
 ```
 
-Without installing: `PYTHONPATH=src python -m adjagent run --no-llm`.
+Without installing: `PYTHONPATH=src python -m adjagent run --no-llm` (PowerShell: `$env:PYTHONPATH="src"; python -m adjagent run --no-llm`). If editable install fails, upgrade pip first.
 
 **With an LLM for explanations** (optional; the decisions are identical either way):
 ```bash
@@ -75,7 +75,7 @@ load (row refs, file hashes) -> preflight diagnostics -> per-entry rules -> deci
 | `trace_*.txt` | Example traces (2120, 6310, 1110) |
 | `hitl_demo/` | Same run with example human overrides: JE-003 acknowledged → accepted; JE-005 mapped 6315→6310 → **re-check rejects it**; override on JE-002 refused |
 
-The committed outputs were generated with `--no-llm` (no API key in the build environment), so the explanations are template-based. Run with a key to get LLM wording.
+`output/` was generated with OpenAI `gpt-4o-mini` explanations (see `explanation_sources` in `run_manifest.json`). Decisions and `run_id` are identical to a `--no-llm` run. `output/hitl_demo/` uses template explanations.
 
 ## Repo layout
 

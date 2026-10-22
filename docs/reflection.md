@@ -22,7 +22,7 @@ I used Claude as my main implementation tool: data profiling, generating the cod
 - **Questions before building.** I sent the three clarifying questions (FX basis, the retained earnings break, JE-008 and approval authority). I rejected the first draft as too long and generic-sounding, had it cut down, and decided which lines stayed.
 - **Scope under time pressure.** When I confirmed the deadline was the same day, I dropped the idea of waiting for answers and chose to proceed on conservative, documented assumptions. I picked the adjustments slice because the seeded defects (JE-002, 003, 005, 008) exercise the whole control loop.
 - **Not overclaiming.** When reviewing the architecture doc against the brief, I had a "built vs designed" table added so the reviewer can see the Mapper is deterministic only and the statements are design-only.
-- **LLM run.** *[Fill in after running with your OpenAI key: which model, and one thing you noticed in its explanations. Example: whether any output was rejected by the number check and fell back to the template.]*
+- **LLM run.** I ran the explainer with gpt-4o-mini. All 10 explanations passed the validator, and the decisions and run_id (77615f210843) were identical to the no-LLM run, confirming the model cannot move a decision. But the headlines were generic ("Journal Entry Accepted", no entry id or reason): the validator checks faithfulness, not usefulness. Next step: require the headline to name the entry and its main rule.
 
 Where the AI-generated work was wrong, and how it was caught (by running the numbers and tests, not by trusting the output):
 
