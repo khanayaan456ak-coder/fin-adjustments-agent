@@ -1,0 +1,27 @@
+{
+  "run_id": "77615f210843",
+  "code_version": "0.1.0",
+  "input_file_sha256": {
+    "trial_balance.csv": "6a5d38f4a7792e5a749d62ec34be8c2aa29f540ccf3c95caedf3e1f1b5203ca8",
+    "prior_period_tb.csv": "aa1439622935eadb08ec1d0911c0c2f207fd9e71d32479326f5714a4c4180595",
+    "chart_of_accounts.csv": "1139711bd276b2d443ab83b9a6461b3e1f62a26416962b0dcd0e0762028e49bf",
+    "fx_rates.csv": "268c9b9b5a14ea5533e596ed8872f1c3b5515c92a46c9b197a10ef9f909d1893",
+    "manual_adjustments.json": "26fcad0c0c7bda5306efea47e0c73238b2828b5d30afdd1bb0d54bb6a6704a0f"
+  },
+  "summary": {
+    "ACCEPTED": 6,
+    "QUARANTINED": 2,
+    "REJECTED": 2
+  },
+  "accepted_entries": [
+    "JE-001",
+    "JE-004",
+    "JE-006",
+    "JE-007",
+    "JE-009",
+    "JE-010"
+  ],
+  "explanation_sources": [
+    "template"
+  ]
+}

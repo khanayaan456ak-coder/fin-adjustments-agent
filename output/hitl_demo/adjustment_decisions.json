@@ -1,0 +1,289 @@
+{
+  "run_id": "af92055fd64e",
+  "period": "2024-Q4",
+  "summary": {
+    "ACCEPTED": 7,
+    "QUARANTINED": 0,
+    "REJECTED": 3
+  },
+  "entries": [
+    {
+      "entry_id": "JE-001",
+      "content_hash": "4ff0cd44d7a3ad04",
+      "description": "Accrue Q4 bonus pool",
+      "date": "2024-12-31",
+      "source": "Finance team \u2014 bonus accrual workbook v3",
+      "total_debits": "850,000.00",
+      "initial_decision": "ACCEPTED",
+      "decision": "ACCEPTED",
+      "findings": [
+        {
+          "rule": "MATERIAL_ENTRY",
+          "severity": "WARN",
+          "message": "This entry (850,000.00) is above the materiality threshold of 340,325.00 (5% of pre-tax income 6,806,500.00). It can be posted but needs documented approval and supporting workings.",
+          "fix": "Attach approval evidence (e.g., Controller sign-off).",
+          "facts": {
+            "amount": "850,000.00",
+            "threshold": "340,325.00",
+            "pretax_income": "6,806,500.00"
+          }
+        }
+      ],
+      "override": null,
+      "explanation": {
+        "headline": "JE-001 passed all blocking checks and was posted.",
+        "explanation": "This entry (850,000.00) is above the materiality threshold of 340,325.00 (5% of pre-tax income 6,806,500.00). It can be posted but needs documented approval and supporting workings.",
+        "suggested_fix": "Attach approval evidence (e.g., Controller sign-off)."
+      },
+      "explanation_source": "template"
+    },
+    {
+      "entry_id": "JE-002",
+      "content_hash": "799f3985b1fd668a",
+      "description": "Reclassify marketing spend wrongly booked to T&E",
+      "date": "2024-12-28",
+      "source": "Controller note 2024-12-28",
+      "total_debits": "28,500.00",
+      "initial_decision": "REJECTED",
+      "decision": "REJECTED",
+      "findings": [
+        {
+          "rule": "DEBITS_NOT_EQUAL_CREDITS",
+          "severity": "ERROR",
+          "message": "Total debits are 28,500.00 but total credits are 25,000.00, a difference of 3,500.00. An entry must balance before it can be posted, and the system will not guess which side is wrong.",
+          "fix": "Confirm the correct amount with the preparer and resubmit with debits equal to credits (either both 28,500.00 or both 25,000.00).",
+          "facts": {
+            "total_debits": "28,500.00",
+            "total_credits": "25,000.00",
+            "difference": "3,500.00"
+          }
+        }
+      ],
+      "override": {
+        "approver": "Controller (demo)",
+        "reason": "Please just post it.",
+        "applied": false,
+        "note": "Ignored: rejected entries (hard errors) cannot be overridden; fix at source."
+      },
+      "explanation": {
+        "headline": "JE-002 was rejected and not posted.",
+        "explanation": "Total debits are 28,500.00 but total credits are 25,000.00, a difference of 3,500.00. An entry must balance before it can be posted, and the system will not guess which side is wrong.",
+        "suggested_fix": "Confirm the correct amount with the preparer and resubmit with debits equal to credits (either both 28,500.00 or both 25,000.00)."
+      },
+      "explanation_source": "template"
+    },
+    {
+      "entry_id": "JE-003",
+      "content_hash": "4ac7468c29512e65",
+      "description": "FX revaluation of EUR cash balance to period-end rate",
+      "date": "2024-12-31",
+      "source": "FX reval calc",
+      "total_debits": "11,200.00",
+      "initial_decision": "QUARANTINED",
+      "decision": "ACCEPTED",
+      "findings": [
+        {
+          "rule": "FX_REVAL_MISMATCH",
+          "severity": "WARN",
+          "message": "The entry books 11,200.00 of revaluation on 1110 (EUR), but recalculating from the trial balance and the given rates does not reproduce it (from period average rate 1.082: EUR 825,400.00 x (1.095 - 1.082) = 10,730.20; from opening rate 1.071: EUR 825,400.00 x (1.095 - 1.071) = 19,809.60). Also, if the trial balance is translated at the period-end rate anyway, this entry would count the revaluation twice. [Acknowledged by Controller (demo): Treasury confirmed 11,200 uses the 30-Dec bank rate; TB foreign rows will be translated excluding this reval.]",
+          "fix": "Share the revaluation workings and confirm whether TB foreign rows are in local currency.",
+          "facts": {
+            "booked": "11,200.00",
+            "foreign_balance": "825,400.00",
+            "currency": "EUR",
+            "expected": {
+              "period_average": "10,730.20",
+              "opening": "19,809.60"
+            }
+          }
+        }
+      ],
+      "override": {
+        "approver": "Controller (demo)",
+        "reason": "Treasury confirmed 11,200 uses the 30-Dec bank rate; TB foreign rows will be translated excluding this reval.",
+        "applied": true,
+        "account_mapping": {},
+        "acknowledged_rules": [
+          "FX_REVAL_MISMATCH"
+        ]
+      },
+      "explanation": {
+        "headline": "JE-003 passed all blocking checks and was posted.",
+        "explanation": "The entry books 11,200.00 of revaluation on 1110 (EUR), but recalculating from the trial balance and the given rates does not reproduce it (from period average rate 1.082: EUR 825,400.00 x (1.095 - 1.082) = 10,730.20; from opening rate 1.071: EUR 825,400.00 x (1.095 - 1.071) = 19,809.60). Also, if the trial balance is translated at the period-end rate anyway, this entry would count the revaluation twice. [Acknowledged by Controller (demo): Treasury confirmed 11,200 uses the 30-Dec bank rate; TB foreign rows will be translated excluding this reval.]",
+        "suggested_fix": "Share the revaluation workings and confirm whether TB foreign rows are in local currency."
+      },
+      "explanation_source": "template"
+    },
+    {
+      "entry_id": "JE-004",
+      "content_hash": "73539254d54249f7",
+      "description": "Bad debt provision top-up",
+      "date": "2024-12-31",
+      "source": "AR aging review",
+      "total_debits": "45,000.00",
+      "initial_decision": "ACCEPTED",
+      "decision": "ACCEPTED",
+      "findings": [],
+      "override": null,
+      "explanation": {
+        "headline": "JE-004 passed all blocking checks and was posted.",
+        "explanation": "No issues were found.",
+        "suggested_fix": "No action needed."
+      },
+      "explanation_source": "template"
+    },
+    {
+      "entry_id": "JE-005",
+      "content_hash": "680309371d536d48",
+      "description": "Reclass conference travel from old code",
+      "date": "2024-12-15",
+      "source": "AP team",
+      "total_debits": "18,500.00",
+      "initial_decision": "QUARANTINED",
+      "decision": "REJECTED",
+      "findings": [
+        {
+          "rule": "CIRCULAR_NO_EFFECT",
+          "severity": "ERROR",
+          "message": "Every line nets to zero on the same account(s) (6310): 18,500.00 is debited and credited to the same place, so the entry changes nothing. This usually means a counterparty account was keyed wrongly.",
+          "fix": "Identify the real counterparty account (e.g., cash or an intercompany receivable) and resubmit.",
+          "facts": {
+            "accounts": [
+              "6310"
+            ],
+            "amount": "18,500.00"
+          }
+        }
+      ],
+      "override": {
+        "approver": "Controller (demo)",
+        "reason": "Map old code 6315 to Travel and Entertainment.",
+        "applied": true,
+        "account_mapping": {
+          "6315": "6310"
+        },
+        "acknowledged_rules": []
+      },
+      "explanation": {
+        "headline": "JE-005 was rejected and not posted.",
+        "explanation": "Every line nets to zero on the same account(s) (6310): 18,500.00 is debited and credited to the same place, so the entry changes nothing. This usually means a counterparty account was keyed wrongly.",
+        "suggested_fix": "Identify the real counterparty account (e.g., cash or an intercompany receivable) and resubmit."
+      },
+      "explanation_source": "template"
+    },
+    {
+      "entry_id": "JE-006",
+      "content_hash": "020f7159c0031d9c",
+      "description": "Depreciation catch-up \u2014 Q4",
+      "date": "2024-12-31",
+      "source": "Fixed asset register",
+      "total_debits": "215,000.00",
+      "initial_decision": "ACCEPTED",
+      "decision": "ACCEPTED",
+      "findings": [],
+      "override": null,
+      "explanation": {
+        "headline": "JE-006 passed all blocking checks and was posted.",
+        "explanation": "No issues were found.",
+        "suggested_fix": "No action needed."
+      },
+      "explanation_source": "template"
+    },
+    {
+      "entry_id": "JE-007",
+      "content_hash": "7e2fada3a4111e13",
+      "description": "Deferred tax true-up",
+      "date": "2024-12-31",
+      "source": "Tax provision memo",
+      "total_debits": "38,000.00",
+      "initial_decision": "ACCEPTED",
+      "decision": "ACCEPTED",
+      "findings": [],
+      "override": null,
+      "explanation": {
+        "headline": "JE-007 passed all blocking checks and was posted.",
+        "explanation": "No issues were found.",
+        "suggested_fix": "No action needed."
+      },
+      "explanation_source": "template"
+    },
+    {
+      "entry_id": "JE-008",
+      "content_hash": "6f60da6bc732236b",
+      "description": "Intercompany settlement \u2014 UK sub",
+      "date": "2024-12-30",
+      "source": "IC reconciliation",
+      "total_debits": "320,000.00",
+      "initial_decision": "REJECTED",
+      "decision": "REJECTED",
+      "findings": [
+        {
+          "rule": "CIRCULAR_NO_EFFECT",
+          "severity": "ERROR",
+          "message": "Every line nets to zero on the same account(s) (2170): 320,000.00 is debited and credited to the same place, so the entry changes nothing. This usually means a counterparty account was keyed wrongly.",
+          "fix": "Identify the real counterparty account (e.g., cash or an intercompany receivable) and resubmit.",
+          "facts": {
+            "accounts": [
+              "2170"
+            ],
+            "amount": "320,000.00"
+          }
+        },
+        {
+          "rule": "IC_NO_COUNTERPARTY",
+          "severity": "WARN",
+          "message": "The chart of accounts has no intercompany receivable or counterparty account to match 2170 against, so this cannot be reconciled or eliminated with the other entity's books.",
+          "fix": "Confirm the counterparty entity and account.",
+          "facts": {
+            "accounts": [
+              "2170"
+            ]
+          }
+        }
+      ],
+      "override": null,
+      "explanation": {
+        "headline": "JE-008 was rejected and not posted.",
+        "explanation": "Every line nets to zero on the same account(s) (2170): 320,000.00 is debited and credited to the same place, so the entry changes nothing. This usually means a counterparty account was keyed wrongly. The chart of accounts has no intercompany receivable or counterparty account to match 2170 against, so this cannot be reconciled or eliminated with the other entity's books.",
+        "suggested_fix": "Identify the real counterparty account (e.g., cash or an intercompany receivable) and resubmit."
+      },
+      "explanation_source": "template"
+    },
+    {
+      "entry_id": "JE-009",
+      "content_hash": "1995895fa654e725",
+      "description": "Accrue legal fees for ongoing litigation",
+      "date": "2024-12-31",
+      "source": "Legal memo dated 2024-12-29",
+      "total_debits": "75,000.00",
+      "initial_decision": "ACCEPTED",
+      "decision": "ACCEPTED",
+      "findings": [],
+      "override": null,
+      "explanation": {
+        "headline": "JE-009 passed all blocking checks and was posted.",
+        "explanation": "No issues were found.",
+        "suggested_fix": "No action needed."
+      },
+      "explanation_source": "template"
+    },
+    {
+      "entry_id": "JE-010",
+      "content_hash": "f9d1755b29c2f75d",
+      "description": "Reclass long-term debt current portion",
+      "date": "2024-12-31",
+      "source": "Treasury schedule",
+      "total_debits": "200,000.00",
+      "initial_decision": "ACCEPTED",
+      "decision": "ACCEPTED",
+      "findings": [],
+      "override": null,
+      "explanation": {
+        "headline": "JE-010 passed all blocking checks and was posted.",
+        "explanation": "No issues were found.",
+        "suggested_fix": "No action needed."
+      },
+      "explanation_source": "template"
+    }
+  ]
+}

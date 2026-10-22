@@ -1,0 +1,293 @@
+[
+  {
+    "id": "TB_UNBALANCED_CURRENT",
+    "severity": "ERROR",
+    "title": "Current trial balance does not balance",
+    "detail": "Raw (mixed-currency) debits 71,072,200.00 vs credits 71,077,000.00, difference -4,800.00. Translated differences are far larger than rounding, so this is not an 'FX rounding' issue: it depends on whether foreign rows are in local currency and which rate applies (asked the client).",
+    "evidence": [],
+    "facts": {
+      "raw_difference": "-4,800.00",
+      "translated": {
+        "period_end": {
+          "debits": "70,738,313.00",
+          "credits": "71,077,000.00",
+          "difference": "-338,687.00",
+          "currencies_excluded_missing_rate": [
+            "GBP"
+          ]
+        },
+        "period_average": {
+          "debits": "71,248,730.00",
+          "credits": "71,077,000.00",
+          "difference": "171,730.00",
+          "currencies_excluded_missing_rate": []
+        }
+      }
+    }
+  },
+  {
+    "id": "TB_UNBALANCED_PRIOR",
+    "severity": "ERROR",
+    "title": "Prior trial balance does not balance",
+    "detail": "Raw (mixed-currency) debits 35,177,800.00 vs credits 32,345,000.00, difference 2,832,800.00. Translated differences are far larger than rounding, so this is not an 'FX rounding' issue: it depends on whether foreign rows are in local currency and which rate applies (asked the client).",
+    "evidence": [],
+    "facts": {
+      "raw_difference": "2,832,800.00",
+      "translated": {
+        "period_end": {
+          "debits": "34,859,669.00",
+          "credits": "32,345,000.00",
+          "difference": "2,514,669.00",
+          "currencies_excluded_missing_rate": [
+            "GBP"
+          ]
+        },
+        "period_average": {
+          "debits": "35,337,834.80",
+          "credits": "32,345,000.00",
+          "difference": "2,992,834.80",
+          "currencies_excluded_missing_rate": []
+        }
+      }
+    }
+  },
+  {
+    "id": "TB_DUPLICATE_ROW",
+    "severity": "HOLD",
+    "title": "Account 6310 (USD) appears 2 times in current TB",
+    "detail": "Kept both rows (not deduplicated) because it could be a genuine split or a double export. Needs confirmation from the ERP owner. Amounts: 245,000.00, 38,500.00",
+    "evidence": [
+      "trial_balance.csv:48",
+      "trial_balance.csv:49"
+    ],
+    "facts": {
+      "account": "6310"
+    }
+  },
+  {
+    "id": "TB_ACCOUNT_NOT_IN_COA",
+    "severity": "HOLD",
+    "title": "Current TB account 9999 'Suspense - Unmapped' is not in the COA",
+    "detail": "Not mapped automatically. Candidate mappings for human review: none credible",
+    "evidence": [
+      "trial_balance.csv:63"
+    ],
+    "facts": {
+      "account": "9999",
+      "amount": "12,400.00",
+      "candidates": []
+    }
+  },
+  {
+    "id": "TB_ACCOUNT_NOT_IN_COA",
+    "severity": "HOLD",
+    "title": "Prior TB account 6905 'Sundry Operating Expenses' is not in the COA",
+    "detail": "Likely renamed/re-coded since prior period. Not mapped automatically. Candidate mappings for human review: 6900 Other Operating Expenses (high, 0.98); 4300 Other Operating Revenue (low, 0.4)",
+    "evidence": [
+      "prior_period_tb.csv:34"
+    ],
+    "facts": {
+      "account": "6905",
+      "amount": "132,000.00",
+      "candidates": [
+        {
+          "code": "6900",
+          "name": "Other Operating Expenses",
+          "score": 0.98,
+          "confidence": "high",
+          "reason": "shares words ['expense', 'operating', 'other']; code 6900 is near 6905"
+        },
+        {
+          "code": "4300",
+          "name": "Other Operating Revenue",
+          "score": 0.4,
+          "confidence": "low",
+          "reason": "shares words ['operating', 'other']"
+        }
+      ]
+    }
+  },
+  {
+    "id": "FX_RATE_MISSING",
+    "severity": "HOLD",
+    "title": "No period_end rate for GBP",
+    "detail": "GBP balance sheet rows cannot be translated at period_end. System blocks rather than falling back to another rate.",
+    "evidence": [],
+    "facts": {
+      "currency": "GBP",
+      "rate_type": "period_end"
+    }
+  },
+  {
+    "id": "FX_RATE_TABLE_INCONSISTENT",
+    "severity": "INFO",
+    "title": "Undocumented 'opening' rate type, USD row missing",
+    "detail": "fx_rates.csv has 'opening' rates for EUR/GBP but not USD, and the README does not document this rate type.",
+    "evidence": [],
+    "facts": {}
+  },
+  {
+    "id": "COA_CONTRA_ACCOUNT",
+    "severity": "INFO",
+    "title": "1121 'Allowance for Doubtful Accounts' is Asset with Credit normal balance (contra)",
+    "detail": "Sign logic must use normal_balance, not account type.",
+    "evidence": [
+      "chart_of_accounts.csv:6"
+    ],
+    "facts": {}
+  },
+  {
+    "id": "COA_AMBIGUOUS_CF",
+    "severity": "HOLD",
+    "title": "1150 'Other Current Assets' has cash-flow category TBD",
+    "detail": "Cash flow statement cannot classify this account until finance decides.",
+    "evidence": [
+      "chart_of_accounts.csv:10"
+    ],
+    "facts": {}
+  },
+  {
+    "id": "COA_CONTRA_ACCOUNT",
+    "severity": "INFO",
+    "title": "1211 'Accumulated Depreciation - PPE' is Asset with Credit normal balance (contra)",
+    "detail": "Sign logic must use normal_balance, not account type.",
+    "evidence": [
+      "chart_of_accounts.csv:13"
+    ],
+    "facts": {}
+  },
+  {
+    "id": "COA_CONTRA_ACCOUNT",
+    "severity": "INFO",
+    "title": "1221 'Accumulated Amortization' is Asset with Credit normal balance (contra)",
+    "detail": "Sign logic must use normal_balance, not account type.",
+    "evidence": [
+      "chart_of_accounts.csv:15"
+    ],
+    "facts": {}
+  },
+  {
+    "id": "COA_EMPTY_HEADER",
+    "severity": "WARN",
+    "title": "Header 1290 'Other Assets' has no children",
+    "detail": "Statement line would always be zero; mapping may be missing.",
+    "evidence": [
+      "chart_of_accounts.csv:19"
+    ],
+    "facts": {}
+  },
+  {
+    "id": "COA_AMBIGUOUS_CF",
+    "severity": "HOLD",
+    "title": "2170 'Intercompany Payable' has cash-flow category TBD",
+    "detail": "Cash flow statement cannot classify this account until finance decides.",
+    "evidence": [
+      "chart_of_accounts.csv:28"
+    ],
+    "facts": {}
+  },
+  {
+    "id": "COA_NON_HEADER_PARENT",
+    "severity": "WARN",
+    "title": "3300 'Accumulated OCI' is typed Equity but is a parent of 3310",
+    "detail": "Ambiguous: is it a posting account or a subtotal? Risk of double counting.",
+    "evidence": [
+      "chart_of_accounts.csv:38"
+    ],
+    "facts": {}
+  },
+  {
+    "id": "COA_CONTRA_ACCOUNT",
+    "severity": "INFO",
+    "title": "3400 'Treasury Stock' is Equity with Debit normal balance (contra)",
+    "detail": "Sign logic must use normal_balance, not account type.",
+    "evidence": [
+      "chart_of_accounts.csv:40"
+    ],
+    "facts": {}
+  },
+  {
+    "id": "COA_CONTRA_ACCOUNT",
+    "severity": "INFO",
+    "title": "4200 'Sales Returns and Allowances' is Revenue with Debit normal balance (contra)",
+    "detail": "Sign logic must use normal_balance, not account type.",
+    "evidence": [
+      "chart_of_accounts.csv:44"
+    ],
+    "facts": {}
+  },
+  {
+    "id": "COA_MISSING_NORMAL_BALANCE",
+    "severity": "WARN",
+    "title": "7000 'Non-Operating Items' has no normal balance",
+    "detail": "",
+    "evidence": [
+      "chart_of_accounts.csv:65"
+    ],
+    "facts": {}
+  },
+  {
+    "id": "COA_NONCASH_CF_TAG",
+    "severity": "INFO",
+    "title": "7310 'FX Gain/Loss - Unrealized' is non-cash but tagged cf_category 'Operating'",
+    "detail": "Indirect cash flow must add this back, not treat it as a cash movement.",
+    "evidence": [
+      "chart_of_accounts.csv:69"
+    ],
+    "facts": {}
+  },
+  {
+    "id": "COA_NONCASH_CF_TAG",
+    "severity": "INFO",
+    "title": "7400 'Gain/Loss on Disposal of Assets' is non-cash but tagged cf_category 'Investing'",
+    "detail": "Indirect cash flow must add this back, not treat it as a cash movement.",
+    "evidence": [
+      "chart_of_accounts.csv:70"
+    ],
+    "facts": {}
+  },
+  {
+    "id": "COA_NON_HEADER_PARENT",
+    "severity": "WARN",
+    "title": "8000 'Income Tax Expense' is typed Expense but is a parent of 8100, 8200",
+    "detail": "Ambiguous: is it a posting account or a subtotal? Risk of double counting.",
+    "evidence": [
+      "chart_of_accounts.csv:71"
+    ],
+    "facts": {}
+  },
+  {
+    "id": "RE_UNEXPLAINED_MOVEMENT",
+    "severity": "HOLD",
+    "title": "Retained earnings moved while P&L is still open",
+    "detail": "Prior 5,180,000.00 -> current 7,240,000.00 (change 2,060,000.00). In a pre-closing TB retained earnings should equal opening less dividends. Possible restatement, dividend or partial close: asked the client.",
+    "evidence": [
+      "trial_balance.csv:31",
+      "prior_period_tb.csv:31"
+    ],
+    "facts": {
+      "change": "2,060,000.00"
+    }
+  },
+  {
+    "id": "PRIOR_TB_INCOMPLETE",
+    "severity": "WARN",
+    "title": "Prior TB has (almost) no P&L accounts",
+    "detail": "Looks like a post-closing TB, yet it does not balance; P&L comparatives unavailable.",
+    "evidence": [
+      "prior_period_tb.csv:34"
+    ],
+    "facts": {}
+  },
+  {
+    "id": "BS_LARGE_MOVEMENT",
+    "severity": "WARN",
+    "title": "1210 'Property, Plant & Equipment - Cost' moved 5,207,700.00 vs prior",
+    "detail": "Prior 11,800,000.00 -> current 17,007,700.00. No supporting entry in the adjustment batch.",
+    "evidence": [
+      "trial_balance.csv:11",
+      "prior_period_tb.csv:11"
+    ],
+    "facts": {}
+  }
+]

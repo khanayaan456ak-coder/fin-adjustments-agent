@@ -1,0 +1,62 @@
+account_code,account_name,currency,pre_debit,pre_credit,adj_debit,adj_credit,post_net_debit_positive,flags,source_refs
+1110,Cash and Cash Equivalents,USD,4250000.00,0.00,0.00,0.00,4250000.00,,trial_balance.csv:2
+1110,Cash and Cash Equivalents,EUR,825400.00,0.00,0.00,0.00,825400.00,,trial_balance.csv:3
+1110,Cash and Cash Equivalents,GBP,412300.00,0.00,0.00,0.00,412300.00,,trial_balance.csv:4
+1120,Accounts Receivable,USD,6180500.00,0.00,0.00,0.00,6180500.00,,trial_balance.csv:5
+1121,Allowance for Doubtful Accounts,USD,0.00,185000.00,0.00,45000.00,-230000.00,,trial_balance.csv:6; JE-004#L2
+1130,Inventory - Raw Materials,USD,1920000.00,0.00,0.00,0.00,1920000.00,,trial_balance.csv:7
+1131,Inventory - Finished Goods,USD,3410000.00,0.00,0.00,0.00,3410000.00,,trial_balance.csv:8
+1140,Prepaid Expenses,USD,245000.00,0.00,0.00,0.00,245000.00,,trial_balance.csv:9
+1150,Other Current Assets,USD,78400.00,0.00,0.00,0.00,78400.00,,trial_balance.csv:10
+1210,"Property, Plant & Equipment - Cost",USD,17007700.00,0.00,0.00,0.00,17007700.00,,trial_balance.csv:11
+1211,Accumulated Depreciation - PPE,USD,0.00,4200000.00,0.00,215000.00,-4415000.00,,trial_balance.csv:12; JE-006#L2
+1220,Intangible Assets - Cost,USD,2800000.00,0.00,0.00,0.00,2800000.00,,trial_balance.csv:13
+1221,Accumulated Amortization,USD,0.00,980000.00,0.00,0.00,-980000.00,,trial_balance.csv:14
+1230,Goodwill,USD,3500000.00,0.00,0.00,0.00,3500000.00,,trial_balance.csv:15
+1240,Long-term Investments,USD,750000.00,0.00,0.00,0.00,750000.00,,trial_balance.csv:16
+1250,Deferred Tax Asset,USD,320000.00,0.00,0.00,38000.00,282000.00,,trial_balance.csv:17; JE-007#L2
+2110,Accounts Payable,USD,0.00,2840000.00,0.00,0.00,-2840000.00,,trial_balance.csv:18
+2120,Accrued Expenses,USD,0.00,1150000.00,0.00,925000.00,-2075000.00,,trial_balance.csv:19; JE-001#L2; JE-009#L2
+2130,Short-term Debt,USD,0.00,1500000.00,0.00,0.00,-1500000.00,,trial_balance.csv:20
+2140,Current Portion of Long-term Debt,USD,0.00,800000.00,0.00,200000.00,-1000000.00,,trial_balance.csv:21; JE-010#L2
+2150,Income Tax Payable,USD,0.00,420000.00,0.00,0.00,-420000.00,,trial_balance.csv:22
+2160,Deferred Revenue,USD,0.00,680000.00,0.00,0.00,-680000.00,,trial_balance.csv:23
+2170,Intercompany Payable,USD,0.00,1240000.00,0.00,0.00,-1240000.00,,trial_balance.csv:24
+2210,Long-term Debt,USD,0.00,6500000.00,200000.00,0.00,-6300000.00,,trial_balance.csv:25; JE-010#L1
+2220,Lease Liability - Long-term,USD,0.00,1320000.00,0.00,0.00,-1320000.00,,trial_balance.csv:26
+2230,Deferred Tax Liability,USD,0.00,485000.00,0.00,0.00,-485000.00,,trial_balance.csv:27
+2240,Pension Obligations,USD,0.00,910000.00,0.00,0.00,-910000.00,,trial_balance.csv:28
+3100,Common Stock,USD,0.00,1000000.00,0.00,0.00,-1000000.00,,trial_balance.csv:29
+3110,Additional Paid-in Capital,USD,0.00,4500000.00,0.00,0.00,-4500000.00,,trial_balance.csv:30
+3200,Retained Earnings,USD,0.00,7240000.00,0.00,0.00,-7240000.00,,trial_balance.csv:31
+3310,FX Translation Reserve,USD,0.00,180000.00,0.00,0.00,-180000.00,,trial_balance.csv:32
+3400,Treasury Stock,USD,420000.00,0.00,0.00,0.00,420000.00,,trial_balance.csv:33
+4100,Product Revenue,USD,0.00,28500000.00,0.00,0.00,-28500000.00,,trial_balance.csv:34
+4110,Service Revenue,USD,0.00,6200000.00,0.00,0.00,-6200000.00,,trial_balance.csv:35
+4200,Sales Returns and Allowances,USD,340000.00,0.00,0.00,0.00,340000.00,,trial_balance.csv:36
+4300,Other Operating Revenue,USD,0.00,125000.00,0.00,0.00,-125000.00,,trial_balance.csv:37
+5100,COGS - Materials,USD,9800000.00,0.00,0.00,0.00,9800000.00,,trial_balance.csv:38
+5110,COGS - Direct Labor,USD,4200000.00,0.00,0.00,0.00,4200000.00,,trial_balance.csv:39
+5120,COGS - Manufacturing Overhead,USD,2650000.00,0.00,0.00,0.00,2650000.00,,trial_balance.csv:40
+6100,Salaries and Wages,USD,5400000.00,0.00,850000.00,0.00,6250000.00,,trial_balance.csv:41; JE-001#L1
+6110,Employee Benefits,USD,920000.00,0.00,0.00,0.00,920000.00,,trial_balance.csv:42
+6120,Payroll Taxes,USD,410000.00,0.00,0.00,0.00,410000.00,,trial_balance.csv:43
+6200,Rent Expense,USD,480000.00,0.00,0.00,0.00,480000.00,,trial_balance.csv:44
+6210,Utilities,USD,115000.00,0.00,0.00,0.00,115000.00,,trial_balance.csv:45
+6220,Office Supplies,USD,62000.00,0.00,0.00,0.00,62000.00,,trial_balance.csv:46
+6300,Marketing and Advertising,USD,980000.00,0.00,0.00,0.00,980000.00,,trial_balance.csv:47
+6310,Travel and Entertainment,USD,283500.00,0.00,0.00,0.00,283500.00,DUPLICATE_SOURCE_ROWS,trial_balance.csv:48; trial_balance.csv:49
+6400,Professional Fees,USD,520000.00,0.00,75000.00,0.00,595000.00,,trial_balance.csv:50; JE-009#L1
+6410,Insurance,USD,180000.00,0.00,0.00,0.00,180000.00,,trial_balance.csv:51
+6500,Depreciation Expense,USD,850000.00,0.00,215000.00,0.00,1065000.00,,trial_balance.csv:52; JE-006#L1
+6510,Amortization Expense,USD,220000.00,0.00,0.00,0.00,220000.00,,trial_balance.csv:53
+6600,Bad Debt Expense,USD,95000.00,0.00,45000.00,0.00,140000.00,,trial_balance.csv:54; JE-004#L1
+6900,Other Operating Expenses,USD,140000.00,0.00,0.00,0.00,140000.00,,trial_balance.csv:55
+7100,Interest Income,USD,0.00,62000.00,0.00,0.00,-62000.00,,trial_balance.csv:56
+7200,Interest Expense,USD,410000.00,0.00,0.00,0.00,410000.00,,trial_balance.csv:57
+7300,FX Gain/Loss - Realized,USD,85000.00,0.00,0.00,0.00,85000.00,,trial_balance.csv:58
+7310,FX Gain/Loss - Unrealized,USD,0.00,42000.00,0.00,0.00,-42000.00,,trial_balance.csv:59
+7400,Gain/Loss on Disposal of Assets,USD,0.00,18000.00,0.00,0.00,-18000.00,,trial_balance.csv:60
+8100,Current Tax Expense,USD,680000.00,0.00,0.00,0.00,680000.00,,trial_balance.csv:61
+8200,Deferred Tax Expense,USD,120000.00,0.00,38000.00,0.00,158000.00,,trial_balance.csv:62; JE-007#L1
+9999,Suspense - Unmapped,USD,12400.00,0.00,0.00,0.00,12400.00,NOT_IN_COA,trial_balance.csv:63

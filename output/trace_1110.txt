@@ -1,0 +1,6 @@
+1110 Cash and Cash Equivalents [USD]  post-adjustment net 4,250,000.00 (debit-positive)
+  <- trial_balance.csv:2        TB row      Dr     4,250,000.00  Cr             0.00
+1110 Cash and Cash Equivalents [EUR]  post-adjustment net 825,400.00 (debit-positive)
+  <- trial_balance.csv:3        TB row      Dr       825,400.00  Cr             0.00
+1110 Cash and Cash Equivalents [GBP]  post-adjustment net 412,300.00 (debit-positive)
+  <- trial_balance.csv:4        TB row      Dr       412,300.00  Cr             0.00

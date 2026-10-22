@@ -1,0 +1,26 @@
+{
+  "_comment": "Human-in-the-loop decisions. Each override is pinned to the entry's content_hash: if the entry changes, the override is ignored. Rejected entries can never be overridden.",
+  "overrides": [
+    {
+      "entry_id": "JE-003",
+      "content_hash": "4ac7468c29512e65",
+      "approver": "Controller (demo)",
+      "reason": "Treasury confirmed 11,200 uses the 30-Dec bank rate; TB foreign rows will be translated excluding this reval.",
+      "acknowledge_rules": ["FX_REVAL_MISMATCH"]
+    },
+    {
+      "entry_id": "JE-005",
+      "content_hash": "680309371d536d48",
+      "approver": "Controller (demo)",
+      "reason": "Map old code 6315 to Travel and Entertainment.",
+      "account_mapping": {"6315": "6310"}
+    },
+    {
+      "entry_id": "JE-002",
+      "content_hash": "799f3985b1fd668a",
+      "approver": "Controller (demo)",
+      "reason": "Please just post it.",
+      "acknowledge_rules": ["DEBITS_NOT_EQUAL_CREDITS"]
+    }
+  ]
+}
