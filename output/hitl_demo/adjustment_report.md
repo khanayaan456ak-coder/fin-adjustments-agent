@@ -1,6 +1,6 @@
 # Manual adjustments review: 2024-Q4
 
-Run `af92055fd64e` · 10 entries · 7 accepted · 0 quarantined · 3 rejected
+Run `cdc7173e6d25` · 10 entries · 7 accepted · 0 quarantined · 3 rejected
 
 | Entry | Description | Amount | Decision | Main reason |
 |---|---|---:|---|---|
@@ -21,9 +21,11 @@ Run `af92055fd64e` · 10 entries · 7 accepted · 0 quarantined · 3 rejected
 
 **JE-001 passed all blocking checks and was posted.**
 
-This entry (850,000.00) is above the materiality threshold of 340,325.00 (5% of pre-tax income 6,806,500.00). It can be posted but needs documented approval and supporting workings.
+This entry (850,000.00) is above the materiality threshold of 340,325.00 (5% of pre-tax income 6,806,500.00). Material manual entries are held until an approver other than the preparer signs off. [Acknowledged by Controller (demo): Reviewed bonus accrual workbook v3; amount agrees to approved bonus pool.]
 
-*What to do:* Attach approval evidence (e.g., Controller sign-off).
+*What to do:* Controller to review the supporting workings and approve (overrides.json).
+
+*Human override:* {"approver": "Controller (demo)", "reason": "Reviewed bonus accrual workbook v3; amount agrees to approved bonus pool.", "applied": true, "account_mapping": {}, "acknowledged_rules": ["MATERIAL_ENTRY"]}
 
 <sub>hash 4ff0cd44d7a3ad04 · explanation: template</sub>
 
@@ -55,7 +57,7 @@ The entry books 11,200.00 of revaluation on 1110 (EUR), but recalculating from t
 
 **JE-004 passed all blocking checks and was posted.**
 
-No issues were found.
+Described as bad debt provision; the accounts used fit that purpose.
 
 *What to do:* No action needed.
 
@@ -77,7 +79,7 @@ Every line nets to zero on the same account(s) (6310): 18,500.00 is debited and 
 
 **JE-006 passed all blocking checks and was posted.**
 
-No issues were found.
+Described as depreciation; the accounts used fit that purpose.
 
 *What to do:* No action needed.
 
@@ -87,7 +89,7 @@ No issues were found.
 
 **JE-007 passed all blocking checks and was posted.**
 
-No issues were found.
+Described as tax adjustment; the accounts used fit that purpose.
 
 *What to do:* No action needed.
 
@@ -97,9 +99,9 @@ No issues were found.
 
 **JE-008 was rejected and not posted.**
 
-Every line nets to zero on the same account(s) (2170): 320,000.00 is debited and credited to the same place, so the entry changes nothing. This usually means a counterparty account was keyed wrongly. The chart of accounts has no intercompany receivable or counterparty account to match 2170 against, so this cannot be reconciled or eliminated with the other entity's books.
+Every line nets to zero on the same account(s) (2170): 320,000.00 is debited and credited to the same place, so the entry changes nothing. This usually means a counterparty account was keyed wrongly. The description says this is a intercompany settlement, but the accounts used do not fit that purpose. A correct intercompany settlement would a settlement moves value between two different accounts (e.g., the intercompany account and cash). The chart of accounts has no intercompany receivable or counterparty account to match 2170 against, so this cannot be reconciled or eliminated with the other entity's books.
 
-*What to do:* Identify the real counterparty account (e.g., cash or an intercompany receivable) and resubmit.
+*What to do:* Identify the real counterparty account (e.g., cash or an intercompany receivable) and resubmit. Confirm what the entry is for and correct the accounts, or update the description.
 
 <sub>hash 6f60da6bc732236b · explanation: template</sub>
 
@@ -107,7 +109,7 @@ Every line nets to zero on the same account(s) (2170): 320,000.00 is debited and
 
 **JE-009 passed all blocking checks and was posted.**
 
-No issues were found.
+Described as accrual; the accounts used fit that purpose.
 
 *What to do:* No action needed.
 
@@ -117,7 +119,7 @@ No issues were found.
 
 **JE-010 passed all blocking checks and was posted.**
 
-No issues were found.
+Described as reclassification; the accounts used fit that purpose.
 
 *What to do:* No action needed.
 

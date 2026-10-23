@@ -80,7 +80,8 @@ def template_explanation(entry_id: str, decision: str, findings: list[Finding]) 
             ACCEPTED: f"{entry_id} passed all blocking checks and was posted."}[decision]
     order = {"ERROR": 0, "HOLD": 1, "WARN": 2, "INFO": 3}
     fs = sorted((f for f in findings if f.severity != "INFO"), key=lambda f: order[f.severity])
-    expl = " ".join(f.message for f in fs) or "No issues were found."
+    expl = " ".join(f.message for f in fs) or " ".join(f.message for f in findings if f.severity == "INFO") \
+        or "No issues were found."
     fixes = [f.fix for f in fs if f.fix and f.severity in ("ERROR", "HOLD")] or \
             [f.fix for f in fs if f.fix] or ["No action needed."]
     return {"headline": head, "explanation": expl, "suggested_fix": " ".join(dict.fromkeys(fixes))}

@@ -16,7 +16,7 @@
 | 10 | Seeded | fx_rates | GBP has no period-end rate | HOLD, no fallback |
 | 11 | Found | adjustments | JE-003 books 11,200 but EUR 825,400 × (1.095 − 1.082) = 10,730.20 (19,809.60 from opening). Plus double-count risk if TB is translated at period-end. | **QUARANTINED** with workings |
 | 12 | Found | adjustments | Mapping 6315→6310 (the obvious fix for JE-005) makes the entry self-offsetting | Flagged in the candidate list; re-validation rejects it (HITL demo) |
-| 13 | Found | adjustments | JE-001 (850,000) exceeds materiality (340,325 = 5% of pre-tax income 6,806,500) | ACCEPTED with approval flag |
+| 13 | Found | adjustments | JE-001 (850,000) exceeds materiality (340,325 = 5% of pre-tax income 6,806,500) | **QUARANTINED** until Controller approval |
 | 14 | Found | adjustments | COA has no intercompany receivable or counterparty account; IC cannot be eliminated | WARN on JE-008 |
 | 15 | Found | TB vs prior | Retained earnings 5,180,000 → 7,240,000 (+2,060,000) while P&L is still open | HOLD (SOCIE blocked); asked client |
 | 16 | Found | prior TB | Prior TB does not balance (raw +2,832,800) and has no P&L accounts except 6905 | ERROR + WARN |

@@ -1,4 +1,3 @@
-2120 Accrued Expenses [USD]  post-adjustment net -2,075,000.00 (debit-positive)
+2120 Accrued Expenses [USD]  post-adjustment net -1,225,000.00 (debit-positive)
   <- trial_balance.csv:19       TB row      Dr             0.00  Cr     1,150,000.00
-  <- JE-001#L2                  JE-001 adj  Dr             0.00  Cr       850,000.00  'Accrue Q4 bonus pool' (source: Finance team — bonus accrual workbook v3)
   <- JE-009#L2                  JE-009 adj  Dr             0.00  Cr        75,000.00  'Accrue legal fees for ongoing litigation' (source: Legal memo dated 2024-12-29)

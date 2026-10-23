@@ -1,6 +1,6 @@
 {
-  "run_id": "af92055fd64e",
-  "code_version": "0.1.0",
+  "run_id": "cdc7173e6d25",
+  "code_version": "0.2.0",
   "input_file_sha256": {
     "trial_balance.csv": "6a5d38f4a7792e5a749d62ec34be8c2aa29f540ccf3c95caedf3e1f1b5203ca8",
     "prior_period_tb.csv": "aa1439622935eadb08ec1d0911c0c2f207fd9e71d32479326f5714a4c4180595",

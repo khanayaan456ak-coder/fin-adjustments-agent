@@ -1,6 +1,6 @@
 [project]
 name = "adjagent"
-version = "0.1.0"
+version = "0.2.0"
 description = "Manual adjustments agent: validates journal entries, explains decisions, posts with lineage"
 requires-python = ">=3.10"
 dependencies = []

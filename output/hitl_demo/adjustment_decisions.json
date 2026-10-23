@@ -1,5 +1,5 @@
 {
-  "run_id": "af92055fd64e",
+  "run_id": "cdc7173e6d25",
   "period": "2024-Q4",
   "summary": {
     "ACCEPTED": 7,
@@ -14,26 +14,43 @@
       "date": "2024-12-31",
       "source": "Finance team \u2014 bonus accrual workbook v3",
       "total_debits": "850,000.00",
-      "initial_decision": "ACCEPTED",
+      "initial_decision": "QUARANTINED",
       "decision": "ACCEPTED",
       "findings": [
         {
           "rule": "MATERIAL_ENTRY",
           "severity": "WARN",
-          "message": "This entry (850,000.00) is above the materiality threshold of 340,325.00 (5% of pre-tax income 6,806,500.00). It can be posted but needs documented approval and supporting workings.",
-          "fix": "Attach approval evidence (e.g., Controller sign-off).",
+          "message": "This entry (850,000.00) is above the materiality threshold of 340,325.00 (5% of pre-tax income 6,806,500.00). Material manual entries are held until an approver other than the preparer signs off. [Acknowledged by Controller (demo): Reviewed bonus accrual workbook v3; amount agrees to approved bonus pool.]",
+          "fix": "Controller to review the supporting workings and approve (overrides.json).",
           "facts": {
             "amount": "850,000.00",
             "threshold": "340,325.00",
             "pretax_income": "6,806,500.00"
           }
+        },
+        {
+          "rule": "BUSINESS_PURPOSE_CONSISTENT",
+          "severity": "INFO",
+          "message": "Described as accrual; the accounts used fit that purpose.",
+          "fix": "",
+          "facts": {
+            "category": "accrual"
+          }
         }
       ],
-      "override": null,
+      "override": {
+        "approver": "Controller (demo)",
+        "reason": "Reviewed bonus accrual workbook v3; amount agrees to approved bonus pool.",
+        "applied": true,
+        "account_mapping": {},
+        "acknowledged_rules": [
+          "MATERIAL_ENTRY"
+        ]
+      },
       "explanation": {
         "headline": "JE-001 passed all blocking checks and was posted.",
-        "explanation": "This entry (850,000.00) is above the materiality threshold of 340,325.00 (5% of pre-tax income 6,806,500.00). It can be posted but needs documented approval and supporting workings.",
-        "suggested_fix": "Attach approval evidence (e.g., Controller sign-off)."
+        "explanation": "This entry (850,000.00) is above the materiality threshold of 340,325.00 (5% of pre-tax income 6,806,500.00). Material manual entries are held until an approver other than the preparer signs off. [Acknowledged by Controller (demo): Reviewed bonus accrual workbook v3; amount agrees to approved bonus pool.]",
+        "suggested_fix": "Controller to review the supporting workings and approve (overrides.json)."
       },
       "explanation_source": "template"
     },
@@ -56,6 +73,15 @@
             "total_debits": "28,500.00",
             "total_credits": "25,000.00",
             "difference": "3,500.00"
+          }
+        },
+        {
+          "rule": "BUSINESS_PURPOSE_CONSISTENT",
+          "severity": "INFO",
+          "message": "Described as reclassification; the accounts used fit that purpose.",
+          "fix": "",
+          "facts": {
+            "category": "reclassification"
           }
         }
       ],
@@ -96,6 +122,15 @@
               "opening": "19,809.60"
             }
           }
+        },
+        {
+          "rule": "BUSINESS_PURPOSE_CONSISTENT",
+          "severity": "INFO",
+          "message": "Described as FX revaluation; the accounts used fit that purpose.",
+          "fix": "",
+          "facts": {
+            "category": "FX revaluation"
+          }
         }
       ],
       "override": {
@@ -123,11 +158,21 @@
       "total_debits": "45,000.00",
       "initial_decision": "ACCEPTED",
       "decision": "ACCEPTED",
-      "findings": [],
+      "findings": [
+        {
+          "rule": "BUSINESS_PURPOSE_CONSISTENT",
+          "severity": "INFO",
+          "message": "Described as bad debt provision; the accounts used fit that purpose.",
+          "fix": "",
+          "facts": {
+            "category": "bad debt provision"
+          }
+        }
+      ],
       "override": null,
       "explanation": {
         "headline": "JE-004 passed all blocking checks and was posted.",
-        "explanation": "No issues were found.",
+        "explanation": "Described as bad debt provision; the accounts used fit that purpose.",
         "suggested_fix": "No action needed."
       },
       "explanation_source": "template"
@@ -152,6 +197,15 @@
               "6310"
             ],
             "amount": "18,500.00"
+          }
+        },
+        {
+          "rule": "BUSINESS_PURPOSE_CONSISTENT",
+          "severity": "INFO",
+          "message": "Described as reclassification; the accounts used fit that purpose.",
+          "fix": "",
+          "facts": {
+            "category": "reclassification"
           }
         }
       ],
@@ -180,11 +234,21 @@
       "total_debits": "215,000.00",
       "initial_decision": "ACCEPTED",
       "decision": "ACCEPTED",
-      "findings": [],
+      "findings": [
+        {
+          "rule": "BUSINESS_PURPOSE_CONSISTENT",
+          "severity": "INFO",
+          "message": "Described as depreciation; the accounts used fit that purpose.",
+          "fix": "",
+          "facts": {
+            "category": "depreciation"
+          }
+        }
+      ],
       "override": null,
       "explanation": {
         "headline": "JE-006 passed all blocking checks and was posted.",
-        "explanation": "No issues were found.",
+        "explanation": "Described as depreciation; the accounts used fit that purpose.",
         "suggested_fix": "No action needed."
       },
       "explanation_source": "template"
@@ -198,11 +262,21 @@
       "total_debits": "38,000.00",
       "initial_decision": "ACCEPTED",
       "decision": "ACCEPTED",
-      "findings": [],
+      "findings": [
+        {
+          "rule": "BUSINESS_PURPOSE_CONSISTENT",
+          "severity": "INFO",
+          "message": "Described as tax adjustment; the accounts used fit that purpose.",
+          "fix": "",
+          "facts": {
+            "category": "tax adjustment"
+          }
+        }
+      ],
       "override": null,
       "explanation": {
         "headline": "JE-007 passed all blocking checks and was posted.",
-        "explanation": "No issues were found.",
+        "explanation": "Described as tax adjustment; the accounts used fit that purpose.",
         "suggested_fix": "No action needed."
       },
       "explanation_source": "template"
@@ -239,13 +313,23 @@
               "2170"
             ]
           }
+        },
+        {
+          "rule": "BUSINESS_PURPOSE_MISMATCH",
+          "severity": "HOLD",
+          "message": "The description says this is a intercompany settlement, but the accounts used do not fit that purpose. A correct intercompany settlement would a settlement moves value between two different accounts (e.g., the intercompany account and cash).",
+          "fix": "Confirm what the entry is for and correct the accounts, or update the description.",
+          "facts": {
+            "category": "intercompany settlement",
+            "expected": "a settlement moves value between two different accounts (e.g., the intercompany account and cash)"
+          }
         }
       ],
       "override": null,
       "explanation": {
         "headline": "JE-008 was rejected and not posted.",
-        "explanation": "Every line nets to zero on the same account(s) (2170): 320,000.00 is debited and credited to the same place, so the entry changes nothing. This usually means a counterparty account was keyed wrongly. The chart of accounts has no intercompany receivable or counterparty account to match 2170 against, so this cannot be reconciled or eliminated with the other entity's books.",
-        "suggested_fix": "Identify the real counterparty account (e.g., cash or an intercompany receivable) and resubmit."
+        "explanation": "Every line nets to zero on the same account(s) (2170): 320,000.00 is debited and credited to the same place, so the entry changes nothing. This usually means a counterparty account was keyed wrongly. The description says this is a intercompany settlement, but the accounts used do not fit that purpose. A correct intercompany settlement would a settlement moves value between two different accounts (e.g., the intercompany account and cash). The chart of accounts has no intercompany receivable or counterparty account to match 2170 against, so this cannot be reconciled or eliminated with the other entity's books.",
+        "suggested_fix": "Identify the real counterparty account (e.g., cash or an intercompany receivable) and resubmit. Confirm what the entry is for and correct the accounts, or update the description."
       },
       "explanation_source": "template"
     },
@@ -258,11 +342,21 @@
       "total_debits": "75,000.00",
       "initial_decision": "ACCEPTED",
       "decision": "ACCEPTED",
-      "findings": [],
+      "findings": [
+        {
+          "rule": "BUSINESS_PURPOSE_CONSISTENT",
+          "severity": "INFO",
+          "message": "Described as accrual; the accounts used fit that purpose.",
+          "fix": "",
+          "facts": {
+            "category": "accrual"
+          }
+        }
+      ],
       "override": null,
       "explanation": {
         "headline": "JE-009 passed all blocking checks and was posted.",
-        "explanation": "No issues were found.",
+        "explanation": "Described as accrual; the accounts used fit that purpose.",
         "suggested_fix": "No action needed."
       },
       "explanation_source": "template"
@@ -276,11 +370,21 @@
       "total_debits": "200,000.00",
       "initial_decision": "ACCEPTED",
       "decision": "ACCEPTED",
-      "findings": [],
+      "findings": [
+        {
+          "rule": "BUSINESS_PURPOSE_CONSISTENT",
+          "severity": "INFO",
+          "message": "Described as reclassification; the accounts used fit that purpose.",
+          "fix": "",
+          "facts": {
+            "category": "reclassification"
+          }
+        }
+      ],
       "override": null,
       "explanation": {
         "headline": "JE-010 passed all blocking checks and was posted.",
-        "explanation": "No issues were found.",
+        "explanation": "Described as reclassification; the accounts used fit that purpose.",
         "suggested_fix": "No action needed."
       },
       "explanation_source": "template"

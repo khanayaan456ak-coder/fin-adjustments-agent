@@ -64,16 +64,51 @@ def test_je008_rejected_circular(res):
     assert {"CIRCULAR_NO_EFFECT", "IC_NO_COUNTERPARTY"} <= rules(d)
 
 
-def test_je001_material_but_accepted(res):
+def test_je001_material_held_for_approval(res):
     d = by_id(res, "JE-001")
-    assert d["decision"] == ACCEPTED
-    assert "MATERIAL_ENTRY" in rules(d)
+    assert d["decision"] == QUARANTINED
+    f = next(f for f in d["findings"] if f["rule"] == "MATERIAL_ENTRY")
+    assert f["severity"] == "HOLD" and f["facts"]["threshold"] == "340,325.00"
 
 
 @pytest.mark.parametrize("id_", ["JE-004", "JE-006", "JE-007", "JE-009", "JE-010"])
-def test_clean_entries_accepted_without_flags(res, id_):
+def test_clean_entries_accepted_with_purpose_verified(res, id_):
     d = by_id(res, id_)
-    assert d["decision"] == ACCEPTED and d["findings"] == []
+    assert d["decision"] == ACCEPTED
+    assert all(f["severity"] == "INFO" for f in d["findings"])
+    assert "BUSINESS_PURPOSE_CONSISTENT" in rules(d)
+
+
+def test_je008_business_purpose_mismatch(res):
+    d = by_id(res, "JE-008")
+    f = next(f for f in d["findings"] if f["rule"] == "BUSINESS_PURPOSE_MISMATCH")
+    assert f["facts"]["category"] == "intercompany settlement"
+
+
+def _entry(desc, lines, source="memo"):
+    from adjagent.loaders import _parse_entry
+    return _parse_entry({"id": "T-1", "description": desc, "date": "2024-12-31", "source": source,
+                         "lines": [{"account": a, "debit": dr, "credit": cr, "memo": ""} for a, dr, cr in lines]})
+
+
+def test_accrual_with_wrong_accounts_is_held(res):
+    from adjagent.checks import Context, decide, validate_entry
+    e = _entry("Accrue December rent", [("6200", 1000, 0), ("1110", 0, 1000)])  # credits cash, not a liability
+    f = validate_entry(e, Context(res.inputs))
+    assert "BUSINESS_PURPOSE_MISMATCH" in {x.rule for x in f} and decide(f) == QUARANTINED
+
+
+def test_missing_source_is_held(res):
+    from adjagent.checks import Context, decide, validate_entry
+    e = _entry("Accrue December rent", [("6200", 1000, 0), ("2120", 0, 1000)], source="")
+    f = validate_entry(e, Context(res.inputs))
+    assert "NO_SUPPORTING_EVIDENCE" in {x.rule for x in f} and decide(f) == QUARANTINED
+
+
+def test_unknown_purpose_needs_reviewer(res):
+    from adjagent.checks import Context, validate_entry
+    e = _entry("Misc adjustment", [("6200", 1000, 0), ("2120", 0, 1000)])
+    assert "BUSINESS_PURPOSE_UNVERIFIED" in {x.rule for x in validate_entry(e, Context(res.inputs))}
 
 
 # ---------------- input diagnostics
@@ -107,13 +142,13 @@ def test_suspense_has_no_credible_mapping(res):
 def test_only_accepted_entries_posted_and_balanced(res):
     adj_dr = sum(l.adj_debit for l in res.ledger)
     adj_cr = sum(l.adj_credit for l in res.ledger)
-    assert adj_dr == adj_cr == Decimal("1423000.00")  # 850k+45k+215k+38k+75k+200k
+    assert adj_dr == adj_cr == Decimal("573000.00")  # 45k+215k+38k+75k+200k (JE-001 held)
 
 
 def test_trace_accrued_expenses_back_to_source(res):
     out = "\n".join(trace_lines(res.inputs, res.ledger, "2120"))
-    assert "-2,075,000.00" in out
-    assert "trial_balance.csv:19" in out and "JE-001#L2" in out and "JE-009#L2" in out
+    assert "-1,225,000.00" in out and "JE-001" not in out  # JE-001 held, not posted
+    assert "trial_balance.csv:19" in out and "JE-009#L2" in out
 
 
 def test_duplicate_rows_kept_and_flagged_not_deduped(res):
@@ -126,6 +161,13 @@ def test_duplicate_rows_kept_and_flagged_not_deduped(res):
 @pytest.fixture(scope="module")
 def res_ov():
     return run(INPUTS, OVERRIDES, use_llm=False)
+
+
+def test_controller_approves_material_entry(res_ov):
+    d = by_id(res_ov, "JE-001")
+    assert d["initial_decision"] == QUARANTINED and d["decision"] == ACCEPTED
+    out = "\n".join(trace_lines(res_ov.inputs, res_ov.ledger, "2120"))
+    assert "-2,075,000.00" in out and "JE-001#L2" in out
 
 
 def test_override_acknowledges_fx_hold(res_ov):
@@ -146,7 +188,7 @@ def test_override_cannot_unreject(res_ov):
 
 def test_stale_override_ignored(tmp_path):
     ov = json.loads(OVERRIDES.read_text())
-    ov["overrides"][0]["content_hash"] = "deadbeefdeadbeef"
+    next(o for o in ov["overrides"] if o["entry_id"] == "JE-003")["content_hash"] = "deadbeefdeadbeef"
     p = tmp_path / "ov.json"
     p.write_text(json.dumps(ov))
     d = by_id(run(INPUTS, p, use_llm=False), "JE-003")
@@ -190,7 +232,7 @@ def test_llm_exception_does_not_block():
     def broken(messages):
         raise TimeoutError("provider down")
 
-    d = by_id(run(INPUTS, use_llm=True, llm=broken), "JE-001")
+    d = by_id(run(INPUTS, use_llm=True, llm=broken), "JE-004")
     assert d["decision"] == ACCEPTED and d["explanation_source"] == "template_fallback"
 
 

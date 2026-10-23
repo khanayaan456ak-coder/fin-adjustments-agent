@@ -231,11 +231,11 @@ def r_fx_reval(e: JournalEntry, ctx: Context) -> list[Finding]:
 def r_materiality(e: JournalEntry, ctx: Context) -> list[Finding]:
     total = sum((l.debit for l in e.lines), Decimal("0"))
     if ctx.materiality and total > ctx.materiality:
-        return [Finding("MATERIAL_ENTRY", WARN,
+        return [Finding("MATERIAL_ENTRY", HOLD,
                         f"This entry ({fmt(total)}) is above the materiality threshold of {fmt(ctx.materiality)} "
-                        f"(5% of pre-tax income {fmt(ctx.pretax_income)}). It can be posted but needs "
-                        f"documented approval and supporting workings.",
-                        "Attach approval evidence (e.g., Controller sign-off).",
+                        f"(5% of pre-tax income {fmt(ctx.pretax_income)}). Material manual entries are held "
+                        f"until an approver other than the preparer signs off.",
+                        "Controller to review the supporting workings and approve (overrides.json).",
                         {"amount": fmt(total), "threshold": fmt(ctx.materiality),
                          "pretax_income": fmt(ctx.pretax_income)})]
     return []
@@ -275,8 +275,80 @@ def r_reclass_scope(e: JournalEntry, ctx: Context) -> list[Finding]:
     return []
 
 
+def _acc(ctx, code):
+    return ctx.coa.get(code)
+
+
+def _names(lines, ctx):
+    return [(_acc(ctx, l.account).name.lower() if _acc(ctx, l.account) else "") for l in lines]
+
+
+def _types(lines, ctx):
+    return [(_acc(ctx, l.account).type if _acc(ctx, l.account) else None) for l in lines]
+
+
+# Business-purpose rules: the description states what the entry is FOR; the accounts must fit
+# that purpose. Each rule: (category, keywords in description, check(debits, credits, ctx) -> bool,
+# what a correct entry looks like). Unknown accounts are skipped here (handled by ACCOUNT_NOT_IN_COA).
+PURPOSE_RULES = [
+    ("intercompany settlement", ("settlement",),
+     lambda d, c, ctx: len({l.account for l in d + c}) >= 2 and any(
+         "cash" in n or "receivable" in n or "intercompany" in n for n in _names(d + c, ctx)),
+     "a settlement moves value between two different accounts (e.g., the intercompany account and cash)"),
+    ("depreciation", ("depreciation",),
+     lambda d, c, ctx: any("depreciation expense" in n for n in _names(d, ctx))
+     and any("accumulated depreciation" in n for n in _names(c, ctx)),
+     "debit Depreciation Expense, credit Accumulated Depreciation"),
+    ("bad debt provision", ("bad debt", "provision", "allowance"),
+     lambda d, c, ctx: "Expense" in _types(d, ctx) and any("allowance" in n for n in _names(c, ctx)),
+     "debit an expense (Bad Debt), credit the Allowance for Doubtful Accounts"),
+    ("FX revaluation", ("reval", "fx "),
+     lambda d, c, ctx: any("fx" in n for n in _names(d + c, ctx))
+     and any((_acc(ctx, l.account) and _acc(ctx, l.account).statement == "BS") for l in d + c),
+     "one side on a balance sheet account, the other on an FX gain/loss account"),
+    ("tax adjustment", ("tax",),
+     lambda d, c, ctx: all(("tax" in n) for n in _names(d + c, ctx) if n),
+     "both sides on tax accounts (tax expense and a tax asset/liability)"),
+    ("accrual", ("accru",),
+     lambda d, c, ctx: "Expense" in _types(d, ctx) and "Liability" in _types(c, ctx),
+     "debit an expense, credit a liability (e.g., Accrued Expenses)"),
+    ("reclassification", ("reclass",),
+     lambda d, c, ctx: len({t for t in _types(d + c, ctx) if t}) <= 1,
+     "both sides on the same kind of account (expense to expense, liability to liability)"),
+]
+
+
+def r_business_purpose(e: JournalEntry, ctx: Context) -> list[Finding]:
+    out = []
+    if not e.source.strip():
+        out.append(Finding("NO_SUPPORTING_EVIDENCE", HOLD,
+                           "The entry has no source or supporting document reference.",
+                           "Attach the supporting workpaper, memo or schedule."))
+    desc = f" {e.description.lower()} "
+    debits = [l for l in e.lines if l.debit > 0 and l.account in ctx.coa]
+    credits = [l for l in e.lines if l.credit > 0 and l.account in ctx.coa]
+    for category, keywords, check, expected in PURPOSE_RULES:
+        if any(k in desc for k in keywords):
+            if check(debits, credits, ctx):
+                out.append(Finding("BUSINESS_PURPOSE_CONSISTENT", INFO,
+                                   f"Described as {category}; the accounts used fit that purpose.",
+                                   facts={"category": category}))
+            else:
+                out.append(Finding(
+                    "BUSINESS_PURPOSE_MISMATCH", HOLD,
+                    f"The description says this is a {category}, but the accounts used do not fit that "
+                    f"purpose. A correct {category} would {expected}.",
+                    "Confirm what the entry is for and correct the accounts, or update the description.",
+                    {"category": category, "expected": expected}))
+            return out
+    out.append(Finding("BUSINESS_PURPOSE_UNVERIFIED", WARN,
+                       "The system could not match the description to a known entry type, so a reviewer "
+                       "must confirm the business purpose.", "Reviewer to confirm purpose."))
+    return out
+
+
 RULES = [r_structure, r_balance, r_accounts, r_self_offset, r_intercompany, r_period,
-         r_fx_reval, r_materiality, r_sign_flip, r_reclass_scope]
+         r_fx_reval, r_materiality, r_sign_flip, r_reclass_scope, r_business_purpose]
 
 
 def validate_entry(e: JournalEntry, ctx: Context, skip: set[str] = frozenset()) -> list[Finding]:

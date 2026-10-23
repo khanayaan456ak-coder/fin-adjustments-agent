@@ -1,10 +1,10 @@
 # Manual adjustments review: 2024-Q4
 
-Run `77615f210843` · 10 entries · 6 accepted · 2 quarantined · 2 rejected
+Run `1e14461b656f` · 10 entries · 5 accepted · 3 quarantined · 2 rejected
 
 | Entry | Description | Amount | Decision | Main reason |
 |---|---|---:|---|---|
-| JE-001 | Accrue Q4 bonus pool | 850,000.00 | ✅ ACCEPTED | MATERIAL_ENTRY |
+| JE-001 | Accrue Q4 bonus pool | 850,000.00 | ⚠️ QUARANTINED | MATERIAL_ENTRY |
 | JE-002 | Reclassify marketing spend wrongly booked to T&E | 28,500.00 | ❌ REJECTED | DEBITS_NOT_EQUAL_CREDITS |
 | JE-003 | FX revaluation of EUR cash balance to period-end rate | 11,200.00 | ⚠️ QUARANTINED | FX_REVAL_MISMATCH |
 | JE-004 | Bad debt provision top-up | 45,000.00 | ✅ ACCEPTED | - |
@@ -17,105 +17,105 @@ Run `77615f210843` · 10 entries · 6 accepted · 2 quarantined · 2 rejected
 
 ## Notes for the finance team
 
-### ✅ JE-001: Accrue Q4 bonus pool
+### ⚠️ JE-001: Accrue Q4 bonus pool
 
-**Journal Entry Accepted**
+**JE-001 is on hold until someone reviews it.**
 
-The journal entry for accruing the Q4 bonus pool has been accepted. However, it exceeds the materiality threshold of 340,325.00, which requires documented approval and supporting workings. This is a standard procedure to ensure proper oversight on significant entries.
+This entry (850,000.00) is above the materiality threshold of 340,325.00 (5% of pre-tax income 6,806,500.00). Material manual entries are held until an approver other than the preparer signs off.
 
-*What to do:* Please attach approval evidence, such as Controller sign-off, to comply with the materiality requirement.
+*What to do:* Controller to review the supporting workings and approve (overrides.json).
 
-<sub>hash 4ff0cd44d7a3ad04 · explanation: llm:gpt-4o-mini</sub>
+<sub>hash 4ff0cd44d7a3ad04 · explanation: template</sub>
 
 ### ❌ JE-002: Reclassify marketing spend wrongly booked to T&E
 
-**Journal Entry REJECTED due to imbalance**
+**JE-002 was rejected and not posted.**
 
-The journal entry was rejected because the total debits of 28,500.00 do not equal the total credits of 25,000.00, resulting in a difference of 3,500.00. For a journal entry to be accepted, the debits must equal the credits. The system cannot determine which side is incorrect.
+Total debits are 28,500.00 but total credits are 25,000.00, a difference of 3,500.00. An entry must balance before it can be posted, and the system will not guess which side is wrong.
 
 *What to do:* Confirm the correct amount with the preparer and resubmit with debits equal to credits (either both 28,500.00 or both 25,000.00).
 
-<sub>hash 799f3985b1fd668a · explanation: llm:gpt-4o-mini</sub>
+<sub>hash 799f3985b1fd668a · explanation: template</sub>
 
 ### ⚠️ JE-003: FX revaluation of EUR cash balance to period-end rate
 
-**Journal Entry Quarantined Due to FX Revaluation Mismatch**
+**JE-003 is on hold until someone reviews it.**
 
-The journal entry has been quarantined because the FX revaluation amount of 11,200.00 does not match the expected calculations based on the trial balance and given rates. The recalculated amounts from both the period average and opening rates indicate discrepancies, suggesting that the revaluation may have been recorded incorrectly. Additionally, if the trial balance is already translated at the period-end rate, this entry could result in double counting the revaluation.
+The entry books 11,200.00 of revaluation on 1110 (EUR), but recalculating from the trial balance and the given rates does not reproduce it (from period average rate 1.082: EUR 825,400.00 x (1.095 - 1.082) = 10,730.20; from opening rate 1.071: EUR 825,400.00 x (1.095 - 1.071) = 19,809.60). Also, if the trial balance is translated at the period-end rate anyway, this entry would count the revaluation twice.
 
-*What to do:* Please share the revaluation workings and confirm whether the trial balance foreign rows are in local currency.
+*What to do:* Share the revaluation workings and confirm whether TB foreign rows are in local currency.
 
-<sub>hash 4ac7468c29512e65 · explanation: llm:gpt-4o-mini</sub>
+<sub>hash 4ac7468c29512e65 · explanation: template</sub>
 
 ### ✅ JE-004: Bad debt provision top-up
 
-**Journal Entry Accepted**
+**JE-004 passed all blocking checks and was posted.**
 
-The journal entry for the bad debt provision top-up has been accepted. It aligns with the AR aging review and appropriately reflects the necessary adjustments to the reserve and allowance accounts. The debit and credit amounts are balanced, ensuring compliance with accounting principles.
+Described as bad debt provision; the accounts used fit that purpose.
 
-*What to do:* No changes needed.
+*What to do:* No action needed.
 
-<sub>hash 73539254d54249f7 · explanation: llm:gpt-4o-mini</sub>
+<sub>hash 73539254d54249f7 · explanation: template</sub>
 
 ### ⚠️ JE-005: Reclass conference travel from old code
 
-**Journal Entry Quarantined**
+**JE-005 is on hold until someone reviews it.**
 
-Your journal entry JE-005 has been quarantined because it includes a line posting to account 6315, which does not exist in the chart of accounts. The closest match is account 6310, but mapping to it would result in both sides of the entry being on the same account, rendering it ineffective. This suggests you may need a new account.
+Line JE-005#L1 posts 18,500.00 to account 6315, which does not exist in the chart of accounts. Closest matches: 6310 Travel and Entertainment (medium confidence); 6300 Marketing and Advertising (low confidence). Note: mapping to 6310 would put both sides of this entry on the same account, so it would have no effect. The preparer may intend a new account.
 
-*What to do:* Please correct the account code to one that exists, request the creation of account 6315 from the COA owner, or approve a mapping in overrides.json for re-checking.
+*What to do:* Either correct the account code, or have the COA owner create the account, or approve a mapping in overrides.json (the entry is then re-checked).
 
-<sub>hash 680309371d536d48 · explanation: llm:gpt-4o-mini</sub>
+<sub>hash 680309371d536d48 · explanation: template</sub>
 
 ### ✅ JE-006: Depreciation catch-up — Q4
 
-**Journal Entry Accepted**
+**JE-006 passed all blocking checks and was posted.**
 
-The journal entry JE-006 for depreciation catch-up has been accepted. It includes a debit to account 6500 and a credit to account 1211, which are appropriate for recording depreciation. The amounts are balanced, and the entry aligns with standard accounting practices for fixed asset depreciation.
+Described as depreciation; the accounts used fit that purpose.
 
-*What to do:* No changes are needed as the entry has been accepted.
+*What to do:* No action needed.
 
-<sub>hash 020f7159c0031d9c · explanation: llm:gpt-4o-mini</sub>
+<sub>hash 020f7159c0031d9c · explanation: template</sub>
 
 ### ✅ JE-007: Deferred tax true-up
 
-**Journal Entry Accepted**
+**JE-007 passed all blocking checks and was posted.**
 
-The journal entry JE-007 for the deferred tax true-up has been accepted. It includes a debit to account 8200 for DTA reduction and a corresponding credit to account 1250 to reduce DTA. The amounts are balanced, and the entry aligns with the tax provision memo dated 2024-12-31.
+Described as tax adjustment; the accounts used fit that purpose.
 
-*What to do:* No action needed as the entry has been accepted.
+*What to do:* No action needed.
 
-<sub>hash 7e2fada3a4111e13 · explanation: llm:gpt-4o-mini</sub>
+<sub>hash 7e2fada3a4111e13 · explanation: template</sub>
 
 ### ❌ JE-008: Intercompany settlement — UK sub
 
-**Journal Entry JE-008 Rejected**
+**JE-008 was rejected and not posted.**
 
-The journal entry was rejected because it nets to zero on the same account (2170). Both a debit and credit of 320,000.00 were recorded, which means the entry has no effect. This typically indicates that a counterparty account was entered incorrectly.
+Every line nets to zero on the same account(s) (2170): 320,000.00 is debited and credited to the same place, so the entry changes nothing. This usually means a counterparty account was keyed wrongly. The description says this is a intercompany settlement, but the accounts used do not fit that purpose. A correct intercompany settlement would a settlement moves value between two different accounts (e.g., the intercompany account and cash). The chart of accounts has no intercompany receivable or counterparty account to match 2170 against, so this cannot be reconciled or eliminated with the other entity's books.
 
-*What to do:* Identify the correct counterparty account (e.g., cash or an intercompany receivable) and resubmit the entry.
+*What to do:* Identify the real counterparty account (e.g., cash or an intercompany receivable) and resubmit. Confirm what the entry is for and correct the accounts, or update the description.
 
-<sub>hash 6f60da6bc732236b · explanation: llm:gpt-4o-mini</sub>
+<sub>hash 6f60da6bc732236b · explanation: template</sub>
 
 ### ✅ JE-009: Accrue legal fees for ongoing litigation
 
-**Journal Entry Accepted**
+**JE-009 passed all blocking checks and was posted.**
 
-The journal entry for accruing legal fees related to ongoing litigation has been accepted. It includes a debit to account 6400 and a credit to account 2120, which are appropriate for this type of transaction. The entry is supported by a legal memo dated December 29, 2024, which provides the necessary documentation for the accrual.
+Described as accrual; the accounts used fit that purpose.
 
-*What to do:* No action needed; the entry is accepted.
+*What to do:* No action needed.
 
-<sub>hash 1995895fa654e725 · explanation: llm:gpt-4o-mini</sub>
+<sub>hash 1995895fa654e725 · explanation: template</sub>
 
 ### ✅ JE-010: Reclass long-term debt current portion
 
-**Journal Entry Accepted**
+**JE-010 passed all blocking checks and was posted.**
 
-The journal entry JE-010 for reclassifying the long-term debt's current portion has been accepted. It aligns with the Treasury schedule and correctly reflects the movement of funds between accounts 2210 and 2140. The debit and credit amounts are balanced, ensuring proper accounting practices.
+Described as reclassification; the accounts used fit that purpose.
 
-*What to do:* No action needed, the entry is accepted.
+*What to do:* No action needed.
 
-<sub>hash f9d1755b29c2f75d · explanation: llm:gpt-4o-mini</sub>
+<sub>hash f9d1755b29c2f75d · explanation: template</sub>
 
 ## Input diagnostics (found before reviewing entries)
 

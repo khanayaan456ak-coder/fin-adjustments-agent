@@ -16,7 +16,7 @@ account_code,account_name,currency,pre_debit,pre_credit,adj_debit,adj_credit,pos
 1240,Long-term Investments,USD,750000.00,0.00,0.00,0.00,750000.00,,trial_balance.csv:16
 1250,Deferred Tax Asset,USD,320000.00,0.00,0.00,38000.00,282000.00,,trial_balance.csv:17; JE-007#L2
 2110,Accounts Payable,USD,0.00,2840000.00,0.00,0.00,-2840000.00,,trial_balance.csv:18
-2120,Accrued Expenses,USD,0.00,1150000.00,0.00,925000.00,-2075000.00,,trial_balance.csv:19; JE-001#L2; JE-009#L2
+2120,Accrued Expenses,USD,0.00,1150000.00,0.00,75000.00,-1225000.00,,trial_balance.csv:19; JE-009#L2
 2130,Short-term Debt,USD,0.00,1500000.00,0.00,0.00,-1500000.00,,trial_balance.csv:20
 2140,Current Portion of Long-term Debt,USD,0.00,800000.00,0.00,200000.00,-1000000.00,,trial_balance.csv:21; JE-010#L2
 2150,Income Tax Payable,USD,0.00,420000.00,0.00,0.00,-420000.00,,trial_balance.csv:22
@@ -38,7 +38,7 @@ account_code,account_name,currency,pre_debit,pre_credit,adj_debit,adj_credit,pos
 5100,COGS - Materials,USD,9800000.00,0.00,0.00,0.00,9800000.00,,trial_balance.csv:38
 5110,COGS - Direct Labor,USD,4200000.00,0.00,0.00,0.00,4200000.00,,trial_balance.csv:39
 5120,COGS - Manufacturing Overhead,USD,2650000.00,0.00,0.00,0.00,2650000.00,,trial_balance.csv:40
-6100,Salaries and Wages,USD,5400000.00,0.00,850000.00,0.00,6250000.00,,trial_balance.csv:41; JE-001#L1
+6100,Salaries and Wages,USD,5400000.00,0.00,0.00,0.00,5400000.00,,trial_balance.csv:41
 6110,Employee Benefits,USD,920000.00,0.00,0.00,0.00,920000.00,,trial_balance.csv:42
 6120,Payroll Taxes,USD,410000.00,0.00,0.00,0.00,410000.00,,trial_balance.csv:43
 6200,Rent Expense,USD,480000.00,0.00,0.00,0.00,480000.00,,trial_balance.csv:44
